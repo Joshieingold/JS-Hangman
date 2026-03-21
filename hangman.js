@@ -53,7 +53,7 @@ function GoToSelectionScreen() {
 function GoToGameScreen() {
     RefreshGame();
     document.querySelector("#start-container").classList.add("hidden");
-    document.querySelector("#result-container").classList.add("hidden");
+    document.querySelector("#result-container").classList.remove("hidden");
     document.querySelector("#game-container").classList.remove("hidden");
 }
 function GoToResultScreen() {
@@ -73,16 +73,24 @@ function RefreshCanvas() {
     ctx.clearRect(0, 0, c.width, c.height);
     // Draw Gallow
     ctx.beginPath();
-    ctx.moveTo(100, 100);
-    ctx.lineTo(350, 100);
+
+    ctx.moveTo(70, 100);
+    ctx.lineTo(450, 100);
+
     ctx.moveTo(350, 100);
     ctx.lineTo(350, 200);
-    ctx.moveTo(100, 100);
+
+    ctx.moveTo(100, 70);
     ctx.lineTo(100, 500);
+
     ctx.moveTo(100, 500);
     ctx.lineTo(20, 500);
+
     ctx.moveTo(100, 500);
-    ctx.lineTo(180, 500);
+    ctx.lineTo(450, 500);
+
+    ctx.moveTo(220, 100);
+    ctx.lineTo(100, 150);
     ctx.lineWidth = 3;
     ctx.stroke();
 }
@@ -108,8 +116,8 @@ function DrawLeftArm() {
     let c = document.querySelector("#hangman-canvas");
     let ctx = c.getContext("2d");
     ctx.beginPath();
-    ctx.moveTo(350, 280);
-    ctx.lineTo(320, 360);
+    ctx.moveTo(350, 310);
+    ctx.lineTo(290, 310);
     ctx.stroke();
 }
 
@@ -117,8 +125,8 @@ function DrawRightArm() {
     let c = document.querySelector("#hangman-canvas");
     let ctx = c.getContext("2d");
     ctx.beginPath();
-    ctx.moveTo(350, 280);
-    ctx.lineTo(380, 360);
+    ctx.moveTo(350, 310);
+    ctx.lineTo(410, 310);
     ctx.stroke();
 }
 
@@ -127,7 +135,7 @@ function DrawLeftLeg() {
     let ctx = c.getContext("2d");
     ctx.beginPath();
     ctx.moveTo(350, 365);
-    ctx.lineTo(330, 420);
+    ctx.lineTo(320, 420);
     ctx.stroke();
 }
 
@@ -136,7 +144,7 @@ function DrawRightLeg() {
     let ctx = c.getContext("2d");
     ctx.beginPath();
     ctx.moveTo(350, 365);
-    ctx.lineTo(370, 420);
+    ctx.lineTo(380, 420);
     ctx.stroke();
 }
 
@@ -155,6 +163,9 @@ function LetterClick(e) {
         return;
     }
     if (e.target.classList.contains("used")) {
+        return;
+    }
+    if (remainingGuesses < 1) {
         return;
     }
     e.target.classList.add("used");
@@ -241,7 +252,6 @@ function RefreshGame() {
         currentLetter.classList.remove("correct");
         currentLetter.classList.remove("incorrect");
     }
-
     // Refresh states
     remainingGuesses = guessAmount;
     SetRandomWord();
@@ -256,7 +266,7 @@ function RefreshGame() {
 function GetCensoredWord(length) {
     let rString = "";
     for (let i = 0; i < length; i++) {
-        rString += "*";
+        rString += " ";
     }
     return rString;
 }
@@ -274,8 +284,8 @@ function SetResultPopOver(result) {
     resultPopOver.innerHTML = CreateResultHTML(result);
 }
 function UpdateGuessCounter() {
-    counter = document.querySelector("#counter");
-    counter.innerHTML = CreateCounterHTML();
+    counter = document.querySelector("#result-message-container");
+    counter.innerHTML = CreateInProgressResultHTML();
 }
 function UpdatePlayerWordValue() {
     let letterSpans = document.querySelector("#found-container");
@@ -289,12 +299,12 @@ function UpdatePlayerWordValue() {
 function CreatePlayerWordHTML() {
     let html = "";
     for (let i = 0; i < userWord.length; i++) {
-        if (userWord[i] !== "*") {
-            html += "<span class='found-letter correct'>";
+        if (userWord[i] !== " ") {
+            html += "<span class='found-letter'>";
         } else {
             html += "<span class='found-letter'>";
         }
-        html += userWord[i];
+        html += userWord[i].toUpperCase();
         html += "</span>";
     }
     return html;
@@ -303,14 +313,21 @@ function CreatePlayerWordHTML() {
 function CreateCounterHTML() {
     return `Guesses Remaining: ${remainingGuesses}`;
 }
+function CreateInProgressResultHTML(result) {
+    let html = "";
+    let selectedCategory = document.querySelector("#category-selector").value;
+    html += `<p class='what-word'>Category: ${selectedCategory}</p>`;
+    html += `<h2 class='what-word'>Guesses Remaining: ${remainingGuesses}<h2>`;
+    return html;
+}
 function CreateResultHTML(result) {
     let html = "";
+    html += `<p class='what-word'>The word was: ${hiddenWord}</p>`;
     if (result === "lose") {
-        html += "<h2 class='incorrect-text'>You lost!</h2>";
+        html += "<h2 class='incorrect-text'>Sorry, you lose!<h2>";
     } else {
-        html += "<h2 class='correct-text'>You Win!!</h2>";
+        html += "<h2 class='correct-text'>Congratulations, you win!</h2>";
     }
-    html += `<p>The word was ${hiddenWord}</p>`;
     return html;
 }
 function CreateDropDownHTML() {

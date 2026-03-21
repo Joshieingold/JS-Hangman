@@ -18,10 +18,6 @@
             <select id="category-selector"></select>
             <button id="start-button">Start Game</button>
         </div>
-        <div id="result-container">
-            <div id="result-message-container"></div>
-            <button id="play-again-button">Play Again</button>
-        </div>
         <div id="game-container">
             <div class="content-container">
                 <div class="letter-container" id="letter-buttons">
@@ -53,14 +49,17 @@
                     <span>Z</span>
                 </div>
                 <div class="hang-man-container">
-                    <h2 id="counter"></h2>
                     <canvas
                         id="hangman-canvas"
                         width="700px"
                         height="600px"
                     ></canvas>
-                    <div id="found-container"></div>
                 </div>
+            </div>
+            <div id="found-container"></div>
+            <div id="result-container">
+                <div id="result-message-container"></div>
+                <button id="play-again-button">Play Again</button>
             </div>
         </div>
     </body>

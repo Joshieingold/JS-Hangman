@@ -1,10 +1,10 @@
 * {
-    --header-color: #81a6c6;
-    --background-color: #aacddc;
-    --button-color: #f3e3d0;
-    --button-used-color: #d2c4b4;
-    --correct-color: #c7eabb;
-    --incorrect-color: #ea7b7b;
+    --header-color: #4b76f3;
+    --background-color: white;
+    --button-color: black;
+    --button-used-color: gray;
+    --correct-color: #67c73d;
+    --incorrect-color: #e13723;
 
     font-family:
         "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -23,32 +23,27 @@ body {
     text-align: center;
     color: white;
     width: 100%;
+    padding: 20px;
     background-color: var(--header-color);
 }
 
 #result-container {
     display: flex;
-    z-index: 2;
-    backdrop-filter: blur(40px);
-    opacity: 0.9;
-    position: fixed;
-    top: 50%;
-    left: 50%;
     align-items: center;
     flex-direction: column;
-    justify-content: space-evenly;
-    transform: translate(-50%, -50%);
-    height: 200px;
-    width: 400px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    justify-content: space-between;
+    text-align: center;
+    gap: 20px;
+    padding: 5px;
+    justify-content: center;
     border-radius: 10px;
-    background-color: var(--header-color);
 }
-#counter,
+
 .start-subtext {
-    background-color: var(--header-color);
-    padding: 10px;
+    background-color: var(--button-color);
+    padding: 20px;
     border-radius: 7px;
+    width: 250px;
     color: white;
 }
 .content-container {
@@ -56,22 +51,30 @@ body {
     flex-direction: row;
     justify-content: center;
     padding: 10px;
+    align-items: center;
 }
 .letter-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 10%;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 50%;
+    height: 30%;
 }
 .letter-container span {
+    display: flex;
     cursor: pointer;
+    width: 70px;
+    height: 70px;
+    font-size: 24pt;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
     padding: 1px;
-    border-radius: 4px;
     background-color: var(--button-color);
     transition: 0.2s ease-in-out;
-    color: black;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    text-align: center;
+    color: white;
 }
 .letter-container span:hover {
     background-color: var(--button-used-color);
@@ -85,18 +88,18 @@ body {
 }
 #found-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 5px;
     width: 100%;
 }
 #found-container span {
     width: 100px;
-    border-radius: 15px;
-    background-color: var(--button-color);
+    border: 3px solid black;
     height: 100px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     justify-content: center;
     align-items: center;
-    font-size: 24pt;
+    font-size: 32pt;
+    font-weight: bold;
     display: flex;
 }
 
@@ -112,14 +115,24 @@ canvas {
     background-color: var(--incorrect-color) !important;
 }
 .correct-text {
-    color: var(--correct-color);
-    font-weight: bold;
+    color: white;
+    background-color: var(--correct-color);
     font-size: 24pt;
+    padding: 5px;
 }
 .incorrect-text {
-    color: var(--incorrect-color);
-    font-weight: bold;
+    color: white;
+    background-color: var(--incorrect-color);
     font-size: 24pt;
+    padding: 5px;
+}
+.what-word {
+    background-color: black;
+    margin-bottom: 5px;
+    color: white;
+    padding: 10px;
+    font-size: 24pt;
+    width: 700px;
 }
 .hidden {
     display: none !important;
@@ -135,7 +148,7 @@ canvas {
 #category-selector {
     padding: 20px;
     width: 200px;
-    background-color: var(--header-color);
+    background-color: var(--button-color);
     border: none;
     border-radius: 7px;
     font-size: 16pt;
@@ -150,6 +163,7 @@ canvas {
     background-color: var(--button-color);
     border: none;
     border-radius: 7px;
+    color: white;
     font-size: 16pt;
     cursor: pointer;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -157,7 +171,8 @@ canvas {
 }
 #play-again-button {
     padding: 10px;
-    width: 150px;
+    width: 240px;
+    color: white;
     background-color: var(--button-color);
     border: none;
     border-radius: 7px;
