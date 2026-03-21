@@ -157,6 +157,9 @@ function LetterClick(e) {
     if (e.target.classList.contains("used")) {
         return;
     }
+    if (remainingGuesses < 1) {
+        return;
+    }
     e.target.classList.add("used");
     if (hiddenWord.toLowerCase().includes(letter.toLowerCase())) {
         UpdateGuess(letter.toLowerCase());
