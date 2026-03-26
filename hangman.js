@@ -15,6 +15,7 @@ let userWord;
 
 window.onload = function () {
     RequestJsonData();
+    UpdateLetterButtons();
     GoToSelectionScreen();
     document
         .querySelector("#start-button")
@@ -284,10 +285,23 @@ function UpdatePlayerWordValue() {
     let letterSpans = document.querySelector("#found-container");
     letterSpans.innerHTML = CreatePlayerWordHTML();
 }
+function UpdateLetterButtons() {
+    let letterContainer = document.querySelector("#letter-buttons");
+    letterContainer.innerHTML = CreateLetterButtonHTML();
+}
 
 ///////////////////
 // HTML Creation //
 ///////////////////
+
+function CreateLetterButtonHTML() {
+    let alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let html = "";
+    for (let i = 0; i < alpha.length; i++) {
+        html += `<span>${alpha[i]}</span>`;
+    }
+    return html;
+}
 
 function CreatePlayerWordHTML() {
     let html = "";
